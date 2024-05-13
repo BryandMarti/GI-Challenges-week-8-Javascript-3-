@@ -19,7 +19,6 @@ function createPatient(name, ssn) {   // Private object with properties
 }
 
 const patient2 = createPatient("John", 123456789);
-
 console.log(patient2.name); 
 // Undefined (not accessible)
 console.log(patient2.ssn); 
