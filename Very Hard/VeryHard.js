@@ -1,78 +1,73 @@
-// Person constructor
+// Person class
 class Person {
   constructor(name, job, age) {
-    this.name = name;
-    this.job = job;
-    this.age = age;
+    Object.assign(this, { name, job, age });
   }
 
-  // Method to exercise
   exercise() {
     console.log(`${this.name} says, "Running is fun! - said no one ever."`);
   }
 
-  // Method to fetch job
   fetchJob() {
     console.log(`${this.name} is a ${this.job}.`);
   }
 }
 
-// Programmer constructor inheriting from Person
+// Programmer class inheriting from Person
 class Programmer extends Person {
   constructor(name, job, age, languages) {
     super(name, job, age);
     this.languages = languages;
-    this.busy = true; // Default value`
-  }
-
-  // Method to complete task
-  completeTask() {
-    this.busy = false;
-  }
-
-  // Method to accept new task
-  acceptNewTask() {
     this.busy = true;
   }
 
-  // Method to offer new task
+  completeTask() { this.busy = false; }
+  acceptNewTask() { this.busy = true; }
+
   offerNewTask() {
-    if (this.busy) {
-      console.log(`${this.name} can't accept any new tasks right now.`);
-    } else {
-      console.log(`${this.name} would love to take on a new responsibility.`);
-    }
+    console.log(`${this.name} ${this.busy ? "can't accept any new tasks right now." : "would love to take on a new responsibility."}`);
   }
 
-  // Method to learn new language
-  learnLanguage(language) {
-    this.languages.push(language);
-  }
-
-  // Method to list languages
-  listLanguages() {
-    return this.languages.join(", ");
-  }
+  learnLanguage(language) { this.languages.push(language); }
+  listLanguages() { return this.languages.join(", "); }
+  isBusy() { return this.busy ? "Busy" : "Available"; }
 }
 
-// Test
-const person1 = new Person("Harold", "Backend Engineer", 20);
-const c1 = new Programmer("Liana", "DevOps", 35, ["HTML", "C#", "LUA"]);
-const c2 = new Programmer("Edwin", "janitor", 55, ["HTML", "SASS", "Ruby"]);
-const c3 = new Programmer("Manny", "SysOps", 31, ["HTML", "CSS", "JS", "R"]);
+// Create people
+const people = [
+  new Programmer("Harold", "Backend Engineer", 20),
+  new Programmer("Liana", "DevOps", 35, ["HTML", "C#", "LUA"]),
+  new Programmer("Edwin", "Janitor", 55, ["HTML", "SASS", "Ruby"]),
+  new Programmer("Manny", "SysOps", 31, ["HTML", "CSS", "JS", "R"])
+];
 
-c1.learnLanguage("CSS");
-c2.learnLanguage("C++");
-c3.learnLanguage("JAVA");
+// Function to find person by name
+const findPerson = name => people.find(person => person.name === name);
 
-console.log(c1.listLanguages()); // Output: HTML, C#, LUA, CSS
-console.log(c2.listLanguages()); // Output: HTML, SASS, Ruby, C++
-console.log(c3.listLanguages()); // Output: HTML, CSS, JS, R, JAVA
+// Function to create input field and button
+const createInputAndButton = () => {
+  const displayElement = document.getElementById('displayChallenge');
+  const nameInput = document.createElement("input");
+  const button = document.createElement("button");
+  const infoDiv = document.createElement("div");
 
-console.log(person1);
-console.log(c1);
-console.log(c2);
-console.log(c3);
+  nameInput.type = "text";
+  nameInput.placeholder = "Enter Name";
+  button.textContent = "Display Info";
 
-person1.exercise();
-person1.fetchJob();
+  button.addEventListener("click", () => {
+    const enteredName = nameInput.value.trim();
+    const person = findPerson(enteredName);
+    infoDiv.innerHTML = person ? `
+    <p>Name: ${person.name},</p>
+    <p>Job: ${person.job}, </p>
+    <p>Age: ${person.age}, </p>
+    <p>Languages: ${person.listLanguages()},</p> 
+    <p>Availability: ${person.isBusy()}</p>` : "Person not found!";
+  });
+
+  [nameInput, button, infoDiv].forEach(element => displayElement.appendChild(element));
+};
+
+// Call function to create input field and button
+createInputAndButton();
