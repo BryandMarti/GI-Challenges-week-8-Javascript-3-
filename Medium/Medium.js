@@ -34,5 +34,4 @@ function createPizzaSharingUI() {
   displayElement.appendChild(button);
 }
 
-// Example usage:
 createPizzaSharingUI();
