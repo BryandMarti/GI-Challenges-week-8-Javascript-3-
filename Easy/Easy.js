@@ -1,18 +1,27 @@
 function exerciseOfTheDay() {
-  let exerciseName = "None";
+  const input = document.getElementById('inputValue');
+  let inputValue = input.value.trim(); 
+  
+  //data validation
+  function isValidExercise(exercise) {
+    // Check if exercise is not empty and not just whitespace
+    return exercise.trim() !== "";
+  }
 
-  return function(exercise) {
-    if (exercise) {
-      exerciseName = exercise;
+  function display(exercise) {
+    if (isValidExercise(exercise)) {
+      inputValue = exercise;
+
+      const challengeDisplay = document.getElementById("easyJS");
+      const hElement = document.createElement('h1');
+      hElement.textContent = `Today's exercise: ${inputValue}`;
+      challengeDisplay.appendChild(hElement);
+
+      console.log("Today's exercise: " + inputValue);
+    } else {
+      console.log("Please enter a valid exercise.");
     }
-    console.log("Today's exercise: " + exerciseName);
-  };
+  }
+
+  display(inputValue);
 }
-
-// Example usage:
-const exercise = exerciseOfTheDay();
-
-console.log(exercise("Running")); 
-console.log(exercise("Swimming"));
-console.log(exercise("Dancing")); 
-console.log(exercise("Fencing")); 
