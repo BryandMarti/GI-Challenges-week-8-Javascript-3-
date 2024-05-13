@@ -22,7 +22,7 @@ class Programmer extends Person {
   constructor(name, job, age, languages) {
     super(name, job, age);
     this.languages = languages;
-    this.busy = true; // Default value
+    this.busy = true; // Default value`
   }
 
   // Method to complete task

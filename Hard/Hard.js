@@ -18,13 +18,11 @@ function createPatient(name, ssn) {   // Private object with properties
   };
 }
 
-const patient2 = createPatient("John", "123-45-6789");
-
+const patient2 = createPatient("John", 123456789);
 console.log(patient2.name); 
 // Undefined (not accessible)
 console.log(patient2.ssn); 
 // Undefined (not accessible)
 console.log(patient2.getName()); 
 // John
-console.log(patient2.getSSN()); 
-// Undefined (not accessible)
+
