@@ -53,16 +53,6 @@ function createPatient(name, ssn, displayElementId) {
   return PII;
 }
 
-<<<<<<< Updated upstream
-const patient2 = createPatient("John", 123456789);
-console.log(patient2.name); 
-// Undefined (not accessible)
-console.log(patient2.ssn); 
-// Undefined (not accessible)
-console.log(patient2.getName()); 
-// John
-=======
+
 // Create a patient object and input field/button in the 'displayChallenge' div
 const patient2 = createPatient("John", "123-45-6789", "displayChallenge");
->>>>>>> Stashed changes
-
